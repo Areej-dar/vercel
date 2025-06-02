@@ -75,7 +75,7 @@ export const FileUploadSection: React.FC<FileUploadSectionProps> = ({
     //     body: formData,
     //   });
     try {
-      const res = await fetch('https://18.118.197.33:8000/risk-assessment/', {
+      const res = await fetch('https://18.118.197.33/risk-assessment/', {
         method: 'POST',
         body: formData,
       });
