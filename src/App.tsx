@@ -31,7 +31,7 @@ function App() {
     try {
       const endpoint = activeTab === 'google' ? 'search_google' : 'search_openai';
       //const res = await fetch(`http://localhost:8000/${endpoint}?q=${encodeURIComponent(query)}`);
-      const res = await fetch(`https://18.118.197.33/${endpoint}?q=${encodeURIComponent(query)}`);
+      const res = await fetch(`http://18.118.197.33:8000/${endpoint}?q=${encodeURIComponent(query)}`);
       const data = await res.json();
 
       const mapped: SearchResult[] =
