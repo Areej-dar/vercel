@@ -111,7 +111,7 @@ export const ReportSection: React.FC<ReportSectionProps> = ({
               </div>
             </div>
 
-            <div className="mt-6 pt-6 border-t border-gray-200">
+            {/* <div className="mt-6 pt-6 border-t border-gray-200">
               <h3 className="text-sm font-medium text-gray-500 mb-2">Report Summary</h3>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-white p-4 rounded-md border border-gray-200">
@@ -127,7 +127,7 @@ export const ReportSection: React.FC<ReportSectionProps> = ({
                   <p className="text-2xl font-semibold text-red-600 mt-1">53</p>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         ) : null}
       </div>
