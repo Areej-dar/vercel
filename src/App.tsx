@@ -26,7 +26,7 @@ function App() {
     }
 
     setIsSearching(true);
-    setTerminalOutput(prev => [...prev, `Searching for: ${query}`]);
+    addToTerminal(`Searching for: ${query}`);
 
     try {
       const endpoint = activeTab === 'google' ? 'search_google' : 'search_openai';
@@ -52,15 +52,28 @@ function App() {
             }));
 
       setSearchResults(mapped);
-      setTerminalOutput(prev => [...prev, `Found ${mapped.length} results`]);
+      addToTerminal(`Found ${mapped.length} results`);
     } catch (error) {
       console.error('Search failed:', error);
-      setTerminalOutput(prev => [...prev, 'Error during search']);
+      addToTerminal('Error during search');
     } finally {
       setIsSearching(false);
     }
   };
 
+  const addToTerminal = (msg: string) => {
+    const excludePatterns = [
+      /^searching for:/i,
+      /results found/i,
+      /found \d+ results/i,
+    ];
+  
+    const shouldExclude = excludePatterns.some((pattern) => pattern.test(msg));
+    if (!shouldExclude) {
+      setTerminalOutput(prev => [...prev, msg]);
+    }
+  };
+  
   return (
     <Layout>
       <SearchSection
@@ -77,7 +90,7 @@ function App() {
         uploadedFile={uploadedFile}
         onFileUpload={setUploadedFile}
         isProcessing={isProcessing}
-        onTerminalOutput={(msg) => setTerminalOutput(prev => [...prev, msg])}
+        onTerminalOutput={(msg) => addToTerminal(msg)}
         onBackendResponse={(res) => setGeneratedReport({
           riskReport: res.risk_report,
           cleanedFile: res.clean_file
